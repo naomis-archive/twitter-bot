@@ -1,14 +1,13 @@
-# Project Name
+# Twitter Bot
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-Project Description
+A Twitter bot which serves as an exploration into the Twitter API.
 
 ## Live Version
 
-This page is not yet deployed.
-<!--This page is currently deployed. [View the live website.]()-->
+This page is currently deployed. [View the live website.](https://twitter.com/BeccaLyria)
 
 ## Feedback and Bugs
 
