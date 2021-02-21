@@ -5,7 +5,7 @@ import { sendPhrase } from "./modules/sendPhrase";
   const Becca = login();
 
   try {
-    const valid = await Becca.get("statuses/home_timeline", {});
+    await Becca.get("statuses/home_timeline", {});
     console.log(
       `Becca logged in on ${new Date(
         Date.now()
@@ -17,14 +17,16 @@ import { sendPhrase } from "./modules/sendPhrase";
     process.exit(1);
   }
   await sendPhrase(Becca);
-  const quoteSpam = setInterval(() => sendPhrase(Becca), 28800000);
+  setInterval(() => sendPhrase(Becca), 28800000);
 
   Becca.stream(
     "statuses/filter",
     { track: "@BeccaLyria,#beccalyria" },
     (stream) => {
       stream.on("data", (tweet) => {
-        if (tweet.user.screen_name === "BeccaLyria") return;
+        if (tweet.user.screen_name === "BeccaLyria") {
+          return;
+        }
         Becca.post(`statuses/retweet/${tweet.id_str}`, {});
         console.info(
           `Retweeted ${tweet.text} on ${new Date(

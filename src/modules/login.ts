@@ -1,6 +1,6 @@
 import Twitter from "twitter";
 
-export const login = () => {
+export const login = (): Twitter => {
   const consumerKey = process.env.CONSUMER_KEY;
   const consumerSecret = process.env.CONSUMER_SECRET;
   const accessToken = process.env.ACCESS_TOKEN;

@@ -2,7 +2,7 @@ import Twitter from "twitter";
 
 import { phrases } from "../data/phrases";
 
-export const sendPhrase = async (Becca: Twitter) => {
+export const sendPhrase = async (Becca: Twitter): Promise<void> => {
   const randomIndex = Math.floor(Math.random() * phrases.length);
 
   const phrase = phrases[randomIndex] + `\n\n#beccalyria`;
