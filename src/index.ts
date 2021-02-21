@@ -1,5 +1,5 @@
 import { login } from "./modules/login";
-import { sendQuote } from "./modules/sendQuote";
+import { sendPhrase } from "./modules/sendPhrase";
 
 (async () => {
   const Becca = login();
@@ -16,8 +16,8 @@ import { sendQuote } from "./modules/sendQuote";
     console.info("Could not validate login. Exiting process.");
     process.exit(1);
   }
-  await sendQuote(Becca);
-  const quoteSpam = setInterval(() => sendQuote(Becca), 28800000);
+  await sendPhrase(Becca);
+  const quoteSpam = setInterval(() => sendPhrase(Becca), 28800000);
 
   Becca.stream(
     "statuses/filter",
