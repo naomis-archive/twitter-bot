@@ -24,12 +24,8 @@ import { sendPhrase } from "./modules/sendPhrase";
     { track: "@BeccaLyria,#beccalyria" },
     (stream) => {
       stream.on("data", (tweet) => {
-        let content = "Hello there! I hope you're having a great day!";
         if (tweet.user.screen_name === "BeccaLyria") return;
-        if (tweet.user.screen_name === "nhcarrigan") {
-          content = "Hello love! How are you today?";
-        }
-        Becca.post(`statuses/retweet/${tweet.id_str}`, { status: content });
+        Becca.post(`statuses/retweet/${tweet.id_str}`, {});
         console.info(
           `Retweeted ${tweet.text} on ${new Date(
             Date.now()

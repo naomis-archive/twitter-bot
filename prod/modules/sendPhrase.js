@@ -36,29 +36,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sendQuote = void 0;
-var quotes_json_1 = require("../data/quotes.json");
-var sendQuote = function (Becca) { return __awaiter(void 0, void 0, void 0, function () {
-    var randomIndex, _a, quote, author, tweetString, err_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+exports.sendPhrase = void 0;
+var phrases_1 = require("../data/phrases");
+var sendPhrase = function (Becca) { return __awaiter(void 0, void 0, void 0, function () {
+    var randomIndex, phrase, err_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                randomIndex = Math.floor(Math.random() * quotes_json_1.motivationalQuotes.length);
-                _a = quotes_json_1.motivationalQuotes[randomIndex], quote = _a.quote, author = _a.author;
-                tweetString = "\"" + quote + "\"\n--" + author + "\nquotes from #freeCodeCamp\n#motivation #beccalyria";
-                if (tweetString.length > 280) {
-                    tweetString = "Oh no! This quote was too long!";
-                }
-                _b.label = 1;
+                randomIndex = Math.floor(Math.random() * phrases_1.phrases.length);
+                phrase = phrases_1.phrases[randomIndex] + "\n\n#beccalyria";
+                _a.label = 1;
             case 1:
-                _b.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, Becca.post("statuses/update", { status: tweetString })];
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, Becca.post("statuses/update", { status: phrase })];
             case 2:
-                _b.sent();
-                console.info("Sent \"" + quote + "\" at " + new Date(Date.now()).toLocaleDateString());
+                _a.sent();
+                console.info("Sent \"" + phrase + "\" on " + new Date(Date.now()).toLocaleDateString() + " at " + new Date(Date.now()).toLocaleTimeString());
                 return [3 /*break*/, 4];
             case 3:
-                err_1 = _b.sent();
+                err_1 = _a.sent();
                 console.error(err_1);
                 console.info("Could not send tweet. Exiting process.");
                 process.exit(1);
@@ -67,4 +63,4 @@ var sendQuote = function (Becca) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-exports.sendQuote = sendQuote;
+exports.sendPhrase = sendPhrase;

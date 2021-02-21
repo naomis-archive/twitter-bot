@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var login_1 = require("./modules/login");
-var sendQuote_1 = require("./modules/sendQuote");
+var sendPhrase_1 = require("./modules/sendPhrase");
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     var Becca, valid, err_1, quoteSpam;
     return __generator(this, function (_a) {
@@ -50,7 +50,7 @@ var sendQuote_1 = require("./modules/sendQuote");
                 return [4 /*yield*/, Becca.get("statuses/home_timeline", {})];
             case 2:
                 valid = _a.sent();
-                console.log("Looks like I am logged in!");
+                console.log("Becca logged in on " + new Date(Date.now()).toLocaleDateString() + " at " + new Date(Date.now()).toLocaleTimeString());
                 return [3 /*break*/, 4];
             case 3:
                 err_1 = _a.sent();
@@ -59,13 +59,25 @@ var sendQuote_1 = require("./modules/sendQuote");
                 process.exit(1);
                 return [3 /*break*/, 4];
             case 4:
-                quoteSpam = setInterval(function () { return sendQuote_1.sendQuote(Becca); }, 28800000);
+                quoteSpam = setInterval(function () { return sendPhrase_1.sendPhrase(Becca); }, 28800000);
                 Becca.stream("statuses/filter", { track: "@BeccaLyria,#beccalyria" }, function (stream) {
                     stream.on("data", function (tweet) {
-                        if (tweet.user.screen_name === "BeccaLyria")
-                            return;
-                        Becca.post("statuses/retweet/" + tweet.id_str, {});
-                        console.info("Retweeted " + tweet.text + " at " + new Date(Date.now()).toLocaleDateString());
+                        console.log(tweet);
+                        /*
+                        let content = "Hello there! I hope you're having a great day!";
+                        if (tweet.user.screen_name === "BeccaLyria") return;
+                        if (tweet.user.screen_name === "nhcarrigan") {
+                          content = "Hello love! How are you today?";
+                        }
+                        Becca.post(`statuses/retweet/${tweet.id_str}`, { status: content });
+                        console.info(
+                          `Retweeted ${tweet.text} on ${new Date(
+                            Date.now()
+                          ).toLocaleDateString()} at ${new Date(
+                            Date.now()
+                          ).toLocaleTimeString()}`
+                        )
+                        ;      */
                     });
                 });
                 return [2 /*return*/];
