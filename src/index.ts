@@ -1,5 +1,5 @@
 import { login } from "./modules/login";
-import { sendQuote } from "./modules/sendQuote";
+import { sendPhrase } from "./modules/sendPhrase";
 
 (async () => {
   const Becca = login();
@@ -16,16 +16,20 @@ import { sendQuote } from "./modules/sendQuote";
     console.info("Could not validate login. Exiting process.");
     process.exit(1);
   }
-  await sendQuote(Becca);
-  const quoteSpam = setInterval(() => sendQuote(Becca), 28800000);
+  await sendPhrase(Becca);
+  const quoteSpam = setInterval(() => sendPhrase(Becca), 28800000);
 
   Becca.stream(
     "statuses/filter",
     { track: "@BeccaLyria,#beccalyria" },
     (stream) => {
       stream.on("data", (tweet) => {
+        let content = "Hello there! I hope you're having a great day!";
         if (tweet.user.screen_name === "BeccaLyria") return;
-        Becca.post(`statuses/retweet/${tweet.id_str}`, {});
+        if (tweet.user.screen_name === "nhcarrigan") {
+          content = "Hello love! How are you today?";
+        }
+        Becca.post(`statuses/retweet/${tweet.id_str}`, { status: content });
         console.info(
           `Retweeted ${tweet.text} on ${new Date(
             Date.now()
